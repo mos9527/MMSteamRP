@@ -1,9 +1,10 @@
 author = "mos9527"
 name = "MegaMix+ Steam Rich Presence"
 enabled = true
-date = "13.08.2022"
+date = "10.09.2022"
 description = """
-MM+ Steam Rich Presence\
+MM+ Steam Rich Presence 
+
 mos9527,2022\
 """
 version = "0.0.1a"

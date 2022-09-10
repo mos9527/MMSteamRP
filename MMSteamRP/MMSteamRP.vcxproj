@@ -286,9 +286,6 @@ del "$(OutputPath)*obj" </Command>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\.gitignore" />
-    <None Include="..\.gitmodules" />
-    <None Include="..\config.toml" />
     <None Include="..\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

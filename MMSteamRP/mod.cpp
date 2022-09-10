@@ -13,7 +13,7 @@
 #define EVENT_MESSAGE_SIZE (BUFSIZE - sizeof(uint32_t))
 struct PipeEvent {
     uint32_t eventType;
-    char eventMessage[EVENT_MESSAGE_SIZE]; // Align to 512B
+    char eventMessage[EVENT_MESSAGE_SIZE];
     PipeEvent() {
         memset(eventMessage, 0, EVENT_MESSAGE_SIZE);
     }
@@ -31,7 +31,7 @@ namespace SteamIPCPipe {
         si.cb = sizeof(si);        
         ZeroMemory(&pi, sizeof(pi));        
         auto result = CreateProcessW(
-            NULL,   // No module name (use command line)
+            NULL,           // No module name (use command line)
             (LPWSTR)FullPathInDllFolder(std::wstring(DAEMONNAME)).c_str(), // Command line
             NULL,           // Process handle not inheritable
             NULL,           // Thread handle not inheritable
@@ -72,7 +72,7 @@ namespace SteamIPCPipe {
             NULL
         );
         if (!result) {
-            LOG(L"Failed to wrtie to pipe! SteamIPCProxy maybe down. Terminating mod.");
+            LOG(L"Failed to wrtie to pipe! SteamIPCProxy maybe down. Further RP settings will be disabled.");
             hPipe = NULL;
             ZeroMemory(&pi, sizeof(pi));
             return false;
@@ -117,13 +117,19 @@ HOOK(INT64, __fastcall, _ChangeGameState, sigChangeGameState(), INT64* a, const 
     }
     WITH_STATE("PV POST PROCESS TASK") { /* Game begins with any gamemode */
         char buf[EVENT_MESSAGE_SIZE] = { 0 };
+        // TODO : Add config support and use libfmt instead
+        // Or any other serializers that will allow us to put tokens
+        // in arbitary positions. Something like:
+        // {title} - {musician} / {difficulty} / {gamemode}
         snprintf(
             buf,
             EVENT_MESSAGE_SIZE,
-            "%s(%s) - %s",
+            "%s - %s/%s - %s - %s",
+            DEFAULT_RP_MESSAGE,
             PVWaitScreenInfo->Name.c_str(),
-            GameDifficultyString(),
-            GameModeString()
+            PVWaitScreenInfo->Music.c_str(),
+            GameModeString(),       // TODO : Add localization support for
+            GameDifficultyString()  // these strings
         );
         SteamIPCPipe::WriteRichPresence(buf);
     }
