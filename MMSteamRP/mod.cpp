@@ -29,14 +29,14 @@ namespace SteamIPCPipe {
     bool StartDaemon() {        
         ZeroMemory(&si, sizeof(si));
         si.cb = sizeof(si);        
-        ZeroMemory(&pi, sizeof(pi));        
+        ZeroMemory(&pi, sizeof(pi));                
         auto result = CreateProcessW(
             NULL,           // No module name (use command line)
             (LPWSTR)FullPathInDllFolder(std::wstring(DAEMONNAME)).c_str(), // Command line
             NULL,           // Process handle not inheritable
             NULL,           // Thread handle not inheritable
             FALSE,          // Set handle inheritance to FALSE
-            CREATE_NO_WINDOW,  // If DML has console enabled, this will let the proxy app inherit it instead of creating a new one
+            GetConsoleWindow() ? NULL : CREATE_NO_WINDOW,  // If DML has console enabled, this will let the proxy app inherit it instead of creating a new one
             NULL,           // Use parent's environment block
             (LPWSTR)FullPathInDllFolder(std::wstring()).c_str(), // Parent directory
             &si,            // Pointer to STARTUPINFO structure
