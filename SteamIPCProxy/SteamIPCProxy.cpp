@@ -183,7 +183,7 @@ int main()
 			switch (evt.eventType)
 			{
 			case PIPE_EVENT_SETRP:
-				LOG << "Updating rich presense: " << evt.eventMessage << '\n';
+				LOG << "Updating rich presence: " << evt.eventMessage << '\n';
 				SteamFriends()->SetRichPresence("steam_display", "#TF_RichPresence_State_PlayingGeneric");
 				ASSERT(
 					SteamFriends()->SetRichPresence("currentmap", evt.eventMessage),
