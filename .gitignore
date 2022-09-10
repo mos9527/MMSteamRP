@@ -1,3 +1,6 @@
 .vs*
 *.zip
 *.tmp
+*\x64\*
+/MMSteamRP/x64/*
+/SteamIPCProxy/x64/*
