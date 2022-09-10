@@ -36,8 +36,8 @@ Global
 		{76724552-66B3-434D-B7C4-ABA3C6FC5E6F}.Release|x64.Build.0 = Release|x64
 		{76724552-66B3-434D-B7C4-ABA3C6FC5E6F}.Release|x86.ActiveCfg = Release|Win32
 		{76724552-66B3-434D-B7C4-ABA3C6FC5E6F}.Release|x86.Build.0 = Release|Win32
-		{BBE3FBBC-5D12-42C9-8C7E-A3D4D8BF6B5E}.Build Mod Archive|x64.ActiveCfg = Debug|x64
-		{BBE3FBBC-5D12-42C9-8C7E-A3D4D8BF6B5E}.Build Mod Archive|x64.Build.0 = Debug|x64
+		{BBE3FBBC-5D12-42C9-8C7E-A3D4D8BF6B5E}.Build Mod Archive|x64.ActiveCfg = Release|x64
+		{BBE3FBBC-5D12-42C9-8C7E-A3D4D8BF6B5E}.Build Mod Archive|x64.Build.0 = Release|x64
 		{BBE3FBBC-5D12-42C9-8C7E-A3D4D8BF6B5E}.Build Mod Archive|x86.ActiveCfg = Debug|Win32
 		{BBE3FBBC-5D12-42C9-8C7E-A3D4D8BF6B5E}.Build Mod Archive|x86.Build.0 = Debug|Win32
 		{BBE3FBBC-5D12-42C9-8C7E-A3D4D8BF6B5E}.Debug|x64.ActiveCfg = Debug|x64
