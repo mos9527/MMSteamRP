@@ -109,6 +109,20 @@ SIG_SCAN
     "\x4C\x8B\xC2\x41\xB9\x00\x00\x00\x00\x48\x8B\x15\x00\x00\x00\x00\x48\x8B\x52\x10\xE9\x00\x00\x00\x00",
     "xxxxx????xxx????xxxxx????"
 )
+SIG_SCAN(
+    sigpv_selector_switch__PvSelector__applySel,
+    0x1406EFA30,
+    "\x40\x57\x48\x81\xEC\x00\x00\x00\x00\x80\xB9\x00\x00\x00\x00\x00\x48\x8B\xF9\x74\x0B\x33\xC0\x48\x81\xC4\x00\x00\x00\x00\x5F\xC3",
+    "xxxxx????xx?????xxxxxxxxxx????xx"
+)
+SIG_SCAN(
+    sigMegaMix__CreateTaskWaitScreen,
+    0x140653C30,
+    "\x48\x89\x5C\x24\x00\x48\x89\x4C\x24\x00\x57\x48\x83\xEC\x20\x48\x8D\x3D\x00\x00\x00\x00",
+    "xxxx?xxxx?xxxxxxxx????"
+)
+FUNCTION_PTR(PvSelector*, __fastcall, getPvSelAddr, readRelCall16Address((uint64_t)sigpv_selector_switch__PvSelector__applySelAddr + 0x1D0));
+
 #define WITH_STATE(X) if (strcmp(state, X) == 0)
 HOOK(INT64, __fastcall, _ChangeGameState, sigChangeGameState(), INT64* a, const char* state) {
 	INT64 result = original_ChangeGameState(a, state);
@@ -128,8 +142,8 @@ HOOK(INT64, __fastcall, _ChangeGameState, sigChangeGameState(), INT64* a, const 
             DEFAULT_RP_MESSAGE,
             PVWaitScreenInfo->Name.c_str(),
             PVWaitScreenInfo->Music.c_str(),
-            GameModeString(),       // TODO : Add localization support for
-            GameDifficultyString()  // these strings
+            pvsel->getGameModeString(),       // TODO : Add localization support for
+            pvsel->getGameDifficultyString()  // these strings
         );
         SteamIPCPipe::WriteRichPresence(buf);
     }
@@ -142,6 +156,10 @@ extern "C"
 {
     void __declspec(dllexport) Init() {
         INSTALL_HOOK(_ChangeGameState);
+        pvsel = getPvSelAddr();
+        PVWaitScreenInfo = (PVWaitScreenInfoStruct*)readLongMOVAddress(
+            (uint64_t)sigMegaMix__CreateTaskWaitScreenAddr + 0x34
+        );
         LOG(L"Hooks installed.");
     }
 

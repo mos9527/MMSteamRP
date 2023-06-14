@@ -10,7 +10,7 @@
 </p>
 
     This mod brings Steam Rich Presence support to PDMM+...in a somewhat unconventional way.
-    Game Version (Steam) : 1.0.2
+    Game Version (Steam) : Suppsosingly, all of them?
     
 ## References
 
